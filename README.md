@@ -4,3 +4,6 @@ vue-big-wheel是基于vue2封装的转盘抽奖组件，使用的是canvas来完
 
 [使用说明](https://wheel.assetss.cn/docs)
 
+贴张demo图看看效果:grin:
+
+![](https://github.com/iamobj/graph-bed/blob/master/1/big-wheel.jpg?raw=true)
