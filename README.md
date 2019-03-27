@@ -1,29 +1,6 @@
-# vue-lucky-wheel
+# vue-big-wheel
 
-## Project setup
-```
-npm install
-```
+vue-big-wheel是基于vue2封装的转盘抽奖组件，使用的是canvas来完成的，支持多种配置选项，且不依赖任何框架，非常小，开箱即用
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[使用说明](https://wheel.assetss.cn/docs)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

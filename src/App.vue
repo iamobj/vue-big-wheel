@@ -8,8 +8,9 @@
         :colors = 'colors'
         fontColor = 'red'
         goClassName = 'btn'
-        :strMaxLength = '5'
-        :strLineLength = '3'
+        :strMaxLength = '14'
+        :strLineLength = '6'
+        strKey='name'
         @go-click = "go"
         @on-over = "onOver"
       >
@@ -24,20 +25,14 @@ export default {
   data() {
     return {
       listData: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "7",
-        "8",
-        "画字画字画字",
-        "8",
-        "7",
-        "8",
+        {name: "iphone 6s", val: 1},
+        {name: "马来西亚一周游", val: 2},
+        {name: "谢谢参与", val: 0},
+        {name: "满10减5购物券", val: 3},
+        {name: "谢谢参与", val: 0},
+        {name: "全球限量定制版GTX2080Ti显卡", val: 8},
+        {name: "10元话费充值券", val: 4},
+        {name: "谢谢参与", val: 0},
       ],
       colors: ["#F47F45", "#FFA468"],
       targetIndex: 0
@@ -46,103 +41,19 @@ export default {
   mounted() {},
   methods: {
     onOver() {
-      console.log(this.listData[this.targetIndex])
+      alert(this.listData[this.targetIndex].name)
     },
     go(event) {
-      console.log('TCL: go -> event', event)
+      console.log("TCL: go -> event", event)
+      // 模拟请求 200ms
       setTimeout(() => {
-        this.targetIndex = 3
+        // 随机
+        this.targetIndex = Math.floor(Math.random() * this.listData.length)
+				console.log("TCL: go -> this.targetIndex", this.targetIndex)
         this.$refs.luckyWheel.rotateFunc(this.targetIndex)
       }, 200);
     },
-    drawRouletteWheel() {
-      var canvas = document.getElementById("wheelcanvas");
-      if (canvas.getContext) {
-        //根据奖品个数计算圆周角度
-        var arc = Math.PI / (turnplate.restaraunts.length / 2);
-        var ctx = canvas.getContext("2d");
-        var r = 245; //半径
-        //在给定矩形内清空一个矩形
-        ctx.clearRect(0, 0, r * 2, r * 2);
-        //strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式
-        ctx.strokeStyle = "#FFBE04";
-        //font 属性设置或返回画布上文本内容的当前字体属性
-        ctx.font = "16px Microsoft YaHei";
-        for (var i = 0; i < turnplate.restaraunts.length; i++) {
-          var angle = turnplate.startAngle + i * arc;
-          ctx.fillStyle = turnplate.colors[i % 2];
-          ctx.beginPath();
-          //arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）
-          ctx.arc(r, r, turnplate.outsideRadius, angle, angle + arc, false);
-          ctx.arc(r, r, turnplate.insideRadius, angle + arc, angle, true);
-          ctx.stroke();
-          ctx.fill();
-          //锁画布(为了保存之前的画布状态)
-          ctx.save();
 
-          //----绘制奖品开始----
-          ctx.fillStyle = "#525252";
-          var text = turnplate.restaraunts[i];
-          var line_height = 24;
-          //translate方法重新映射画布上的 (0,0) 位置
-          ctx.translate(
-            r + Math.cos(angle + arc / 2) * turnplate.textRadius,
-            r + Math.sin(angle + arc / 2) * turnplate.textRadius
-          );
-
-          //rotate方法旋转当前的绘图
-          ctx.rotate(angle + arc / 2 + Math.PI / 2);
-
-          /** 下面代码根据奖品类型、奖品名称长度渲染不同效果，如字体、颜色、图片效果。(具体根据实际情况改变) **/
-          if (text.indexOf("M") > 0) {
-            //流量包
-            var texts = text.split("M");
-            for (var j = 0; j < texts.length; j++) {
-              if (j == 0) {
-                ctx.fillText(
-                  texts[j] + "M",
-                  -ctx.measureText(texts[j] + "M").width / 2,
-                  j * line_height
-                );
-              } else {
-                ctx.fillText(
-                  texts[j],
-                  -ctx.measureText(texts[j]).width / 2,
-                  j * line_height
-                );
-              }
-            }
-          } else if (text.indexOf("减") != -1) {
-            //奖品名称长度超过一定范围
-            var texts = text.split("减");
-            for (var j = 0; j < texts.length; j++) {
-              ctx.font =
-                j == 0 ? "bold 20px Microsoft YaHei" : "16px Microsoft YaHei";
-              if (j == 0) {
-                ctx.fillText(
-                  texts[j],
-                  -ctx.measureText(texts[j]).width / 2,
-                  j * line_height
-                );
-              } else {
-                ctx.fillText(
-                  "减" + texts[j],
-                  -ctx.measureText("减" + texts[j]).width / 2,
-                  j * line_height
-                );
-              }
-            }
-          } else {
-            //在画布上绘制填色的文本。文本的默认颜色是黑色
-            //measureText()方法返回包含一个对象，该对象包含以像素计的指定字体宽度
-            ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-          }
-          //把当前画布返回（调整）到上一个save()状态之前
-          ctx.restore();
-          //----绘制奖品结束----
-        }
-      }
-    }
   },
   components: {
     vueBigWheel
@@ -152,15 +63,25 @@ export default {
 <style  lang='scss'>
 #demo {
   width: 100vw;
-  height: 100vh;
-  background: rgb(97, 168, 168);
+  min-height: 100vh;
+  background-image: url('./assets/img/wheel_bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100%;
+  overflow: hidden;
   .box {
-    // width: 300px;
-    // height: 300px;
+    box-sizing: border-box;
+    width: 3.42rem;
+    height: 3.42rem;
+    margin: 1.7rem auto 0;
+    padding: .22rem;
+    background-image: url('./assets/img/disk_bg.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
     overflow: hidden;
     .btn { // 使用自定义类 不能用scope
-      // width: 2rem;
-      // top: 1px;
+      width: 1.12rem;
     }
   }
 }

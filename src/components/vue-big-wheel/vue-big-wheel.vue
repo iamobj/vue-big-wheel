@@ -23,14 +23,18 @@ export default {
   name: 'vueBigWheel',
   props: {
     prizeList: {  //奖品列表
-      type: Array
+      type: Array,
+      required: true
     },
     colors: { // 奖品区块对应背景颜色
       type: Array,
       default: () => [
         "#F47F45",
         "#FFA468"
-      ]
+      ],
+      validator: function(value) {
+        return value.length == 2
+      }
     },
     transitionDuration: { // 旋转动画时间 单位s
       type: Number,
@@ -42,7 +46,7 @@ export default {
     },
     fontSize: { // 奖品文字的大小
       type: String,
-      default: () => '16px'
+      default: () => '18px'
     },
     fontFamily: { // 奖品文字的字体
       type: String,
@@ -54,6 +58,10 @@ export default {
     },
     goClassName: { // 开始按钮自定义类名
       type: String
+    },
+    strKey: { // 奖品名称所对应的key
+      type: String,
+      required: true
     },
     strMaxLength: { // 奖品文字总长度限制
       type: Number,
@@ -137,6 +145,17 @@ export default {
       //strokeStyle 绘制颜色
       ctx.strokeStyle = "#FFBE04"; // 设置描边颜色
       //font 画布上文本内容的当前字体属性
+      // 整个画板会跟着放大缩小 字和图形都跟着被放大缩小  所以不需要rem单位
+      // let _fontSize = _this.fontSize
+      // if(_fontSize.includes('rem')) {
+      //   // debugger
+      //   // 获取html元素字体大小 得知1rem等于多少px
+      //   let _rootSize = getComputedStyle(document.querySelector('html'))['font-size']
+      //   _rootSize = _rootSize.slice(0, _rootSize.indexOf('px'))
+      //   let _size = _fontSize.slice(0, _fontSize.indexOf('rem'))
+
+      //   _fontSize = Number(_size) * Number(_rootSize) + 'px'
+      // }
       ctx.font = `${_this.fontSize} ${_this.fontFamily}`;
       // 注意，开始画的位置是从0°角的位置开始画的。也就是水平向右的方向。
 
@@ -182,7 +201,7 @@ export default {
         /*----绘制奖品内容*/
         
         ctx.fillStyle = _this.fontColor;
-        let rewardName = _this._limit(_this.prizeList[i],_this.strMaxLength);
+        let rewardName = _this._limit(_this.prizeList[i][_this.strKey], _this.strMaxLength);
         let line_height = 17;
 
         // translate方法重新映射画布上的 (0,0) 位置
@@ -236,7 +255,7 @@ export default {
   height: 100%;
   ._big-wheel-canvas {
     width: 100%;
-    transition: transform cubic-bezier(.11,.77,.2,.94); // 转盘旋转
+    transition: transform cubic-bezier(0.11,0.77,0.2,0.94); // 转盘旋转
   }
   ._big-wheel-go-img {
     width: 112px;
