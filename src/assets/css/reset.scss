@@ -10,36 +10,105 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video, input {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font-weight: normal;
-    vertical-align: baseline;
+time, mark, audio, video, input, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
 }
+
 article, aside, details, figcaption, figure,
 footer, header, menu, nav, section {
-    display: block;
+  display: block;
 }
-html {
-  line-height: 1;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-text-size-adjust: none;
-}
+
 body {
-  font-family: Helvetica Neue,Tahoma,Arial,PingFangSC-Regular,Hiragino Sans GB,Microsoft Yahei,sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
-  color: #000;
+  // -webkit-user-select: none; /* 文本不能被选择 */
+  // user-select: none; /* 文本不能被选择 */
+  -webkit-font-smoothing: antialiased; /* 字体抗锯齿，使用后字体看起来会更清晰舒服 */
+  -moz-osx-font-smoothing: grayscale; /* 字体抗锯齿，使用后字体看起来会更清晰舒服 */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-family: Helvetica Neue, Tahoma, Arial, PingFangSC-Regular, Hiragino Sans GB, Microsoft Yahei, sans-serif;
+  line-height: 1.425;
+  color: #333;
   background: #fff;
 }
-a {
-  background: transparent;
-  text-decoration: none;
-  -webkit-backface-visibility: hidden;
+
+blockquote,
+q {
+  quotes: none;
 }
-li {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption,
+th,
+td {
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+i {
+  font-style:normal;
+}
+
+a {
+  text-decoration: none;
+  background: transparent;
+}
+
+ol,ul {
   list-style: none;
+}
+
+button,
+input[type='number'],
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='search'],
+select,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  -webkit-appearance: none;
+}
+
+input {
+  -webkit-appearance: none; /* 去除input在移动端有圆角 */
+  &::-webkit-search-cancel-button {
+    /* 去掉输入框为search 默认自带叉叉 不同手机不同表现 */
+    display: none;
+  }
+  /* placeholder颜色 */
+  &::-webkit-input-placeholder{
+      color:#DBDBDB;
+  }
+}
+
+textarea {
+ /* placeholder颜色 */
+ &::-webkit-input-placeholder{
+     color:#DBDBDB;
+ }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc(100vw / 3.75);
 }

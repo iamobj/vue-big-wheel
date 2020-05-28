@@ -1,11 +1,16 @@
 {
   "name": "vue-big-wheel",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "private": false,
   "author": "Ruan HongChao c@rhc.im",
-  "main": "./dist/vueBigWheel.umd.min.js",
+  "main": "./dist/VueBigWheel.umd.min.js",
   "description": "基于vue2.*开发的大转盘抽奖组件，开箱即用！",
-  "keywords": ["幸运大转盘","vue幸运大转盘","vue大转盘","大转盘抽奖"],
+  "keywords": [
+    "幸运大转盘",
+    "vue幸运大转盘",
+    "vue大转盘",
+    "大转盘抽奖"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/iamobj/vue-big-wheel"
@@ -13,26 +18,38 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name vueBigWheel ./src/components/vue-big-wheel/index.js"
+    "build-lib": "vue-cli-service build --target lib --name VueBigWheel ./src/components/BigWheel/index.js",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "vue": "^2.6.6"
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-service": "^3.5.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-plugin-eslint": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "autoprefixer": "^9.8.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "lint-staged": "^9.5.0",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
   },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
 }
