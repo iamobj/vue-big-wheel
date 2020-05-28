@@ -7,7 +7,7 @@
         ref="bigWheel"
         :prizeList="prizeList"
         @over="over">
-        <template slot="item" slot-scope="{ item }">
+        <template v-slot:item="{ item }">
           <div class="prize-name">{{item.txt}}</div>
           <img class="prize-img" :src="item.img">
         </template>
