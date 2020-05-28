@@ -2,13 +2,15 @@
 
 **vue-big-wheel**是一款基于Vue2.x封装的转盘抽奖组件，支持多种配置选项，灵活适用各种场景，且不依赖任何框架，非常小，开箱即用
 
-移动端、PC端网页都能使用
+移动端、PC端页面都能使用
 
 ## 版本说明
 
 npm最新的包是1.x版本，1.x版本完全不兼容0.x，使用0.x版本的注意1.x不兼容0.x，1.x版本代码新增配置奖品图片且使用eslint规范代码且代码逻辑更清晰，比0.x配置更简化且更灵活。
 
 1.x版本为了让指针更好的自定义就没带转盘指针，转盘指针需要自行放置，1.x只渲染转盘
+
+[传送到0.x版本](https://github.com/iamobj/vue-big-wheel/tree/0.x)
 
 ## 安装
 
@@ -18,7 +20,10 @@ npm i vue-big-wheel -S
 
 ## 使用
 
-在代码中引入，然后使用，参考demo代码
+在代码中引用，然后使用，参考[demo代码](https://github.com/iamobj/vue-big-wheel/blob/1.x/src/App.vue)
+demo引用是直接引用本地组件`import BigWheel from '@/components/BigWheel'`
+
+你们安装依赖后引用是`import BigWheel from 'vue-big-wheel'`
 
 ## API
 
